@@ -1,0 +1,849 @@
+:root {
+    --bg-color: #050508;
+    --primary-glow: #FFFFFF; /* Снова основной белый */
+    --secondary-glow: #EAE6FF; /* Нежный, светлый оттенок фиолетового для фона */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --border-color: rgba(255, 255, 255, 0.2);
+    --surface-color: #1a1a1e;
+    --surface-darker: #111113;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* --- ANIMATED BACKGROUND --- */
+.background-effects {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.glow-sphere-1, .glow-sphere-2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(180px);
+}
+
+.glow-sphere-1 {
+    width: 700px;
+    height: 700px;
+    background: var(--primary-glow);
+    top: -150px;
+    left: -200px;
+    opacity: 0.05; 
+    animation: move-glow1 20s infinite alternate ease-in-out;
+}
+
+.glow-sphere-2 {
+    width: 600px;
+    height: 600px;
+    background: var(--secondary-glow);
+    bottom: -200px;
+    right: -200px;
+    opacity: 0.1;
+    animation: move-glow2 25s infinite alternate ease-in-out;
+}
+
+@keyframes move-glow1 { to { transform: translate(100px, 150px); } }
+@keyframes move-glow2 { to { transform: translate(-150px, -100px); } }
+
+/* --- GENERAL & HEADER --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 0;
+    z-index: 100;
+    transition: background-color 0.4s, border-bottom 0.4s;
+}
+
+header.scrolled {
+    background-color: rgba(5, 5, 8, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-glow);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-glow);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* --- SECTIONS --- */
+section {
+    padding: 120px 0;
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* --- HOME SECTION --- */
+#home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.home-main-logo {
+    max-width: 180px;
+    margin: 0 auto 20px;
+}
+
+#home h1 {
+    font-size: 6rem;
+    font-weight: 900;
+    letter-spacing: -3px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.animate-text-reveal span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal-char 0.5s forwards ease-out;
+}
+
+@keyframes reveal-char {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#home .subtitle {
+    font-size: 1.5rem;
+    color: var(--primary-glow);
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.home-buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button {
+    color: #000;
+    background-color: var(--primary-glow);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    color: var(--primary-glow);
+    border: 2px solid var(--primary-glow);
+}
+
+
+.cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+}
+
+.cta-button:active, .rollback-button:active, .social-link:active {
+    transform: translateY(0) scale(0.95);
+    box-shadow: none;
+}
+
+/* --- EVENTS SECTION --- */
+
+#events .container {
+    max-width: 1200px;
+}
+
+.events-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.event-card {
+    background: var(--surface-darker);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    min-height: 800px;
+    border: 1px solid transparent;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: all 0.4s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    background: rgba(40, 40, 52, 0.5);
+    backdrop-filter: blur(8px);
+    border-color: var(--border-color);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.event-poster-column {
+    width: 100%;
+    height: 450px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-poster-column img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.event-poster-column:hover img {
+    transform: scale(1.1);
+}
+
+.event-poster-column::after {
+    content: 'Нажмите для просмотра 🔍';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.event-poster-column:hover::after {
+    opacity: 1;
+}
+
+.event-details-column {
+    flex-grow: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 25px;
+}
+
+.poster-header {
+    width: 100%;
+    text-align: center;
+}
+
+.artist-list, .organizer-info {
+    width: 100%;
+    text-align: center;
+}
+
+.artist-list p .artist-link {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    transition: color 0.3s;
+}
+
+.artist-list p .artist-link:hover {
+    color: var(--primary-glow);
+}
+
+
+.details-bottom {
+    margin-top: auto;
+}
+
+.artist-list h4, .organizer-info h4 {
+    color: var(--primary-glow);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.artist-list p, .organizer-info a {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.organizer-info a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 2px dotted var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.organizer-info a:hover {
+    color: var(--primary-glow);
+    border-bottom-color: var(--primary-glow);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.poster-header .event-brand {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+
+.poster-header .event-platform {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.poster-header .event-platform b {
+    color: var(--text-primary);
+    font-weight: 900;
+}
+
+.rollback-button {
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    color: #000;
+    background: var(--primary-glow);
+    border: 2px solid var(--primary-glow);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.rollback-button:hover {
+    background: transparent;
+    color: var(--primary-glow);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+/* --- INSTRUCTIONS & SUPPORT SECTIONS --- */
+#instructions, #support {
+    padding-bottom: 0;
+}
+.instructions-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+}
+.instruction-step {
+    background: var(--surface-color);
+    padding: 30px;
+    border-radius: 12px;
+    flex: 1;
+    max-width: 350px;
+}
+.instruction-icon {
+    margin-bottom: 20px;
+}
+.instruction-icon svg {
+    width: 48px;
+    height: 48px;
+    color: var(--primary-glow);
+}
+.instruction-step h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+.instruction-step p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.cta-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: var(--surface-darker);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 25px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    flex: 1;
+}
+.cta-card:hover {
+    transform: scale(1.03);
+    border-color: var(--primary-glow);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+.cta-card-icon svg {
+    width: 48px;
+    height: 48px;
+    color: var(--primary-glow);
+    flex-shrink: 0;
+}
+.cta-card-text {
+    flex-grow: 1;
+    text-align: left;
+}
+.cta-card-text h3 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+.cta-card-text p {
+    color: var(--text-secondary);
+}
+.cta-card-arrow svg {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease;
+}
+.cta-card:hover .cta-card-arrow svg {
+    transform: translateX(5px);
+}
+
+#instructions .cta-card {
+    max-width: 1040px;
+    margin: 60px auto 0;
+}
+.cta-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1040px;
+    margin: 60px auto 0;
+}
+
+/* --- LINKS SECTION --- */
+#links {
+    padding-top: 120px;
+    text-align: center;
+}
+
+#links .links-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#links p {
+    max-width: 500px;
+    margin: -10px auto 40px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+.links-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 200px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.social-link:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-glow);
+    color: var(--primary-glow);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.social-link svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+/* --- SCROLL ANIMATIONS --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- MODAL STYLES --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 700px;
+    animation-name: zoomIn;
+    animation-duration: 0.4s;
+}
+
+.modal-content.small {
+    max-width: 550px;
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0.8)}
+    to {transform: scale(1)}
+}
+
+.close-modal-button {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-modal-button:hover,
+.close-modal-button:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+
+
+/* --- СТИЛИ ДЛЯ СТРАНИЦЫ АРТИСТА --- */
+.artist-page-section {
+    padding-top: 120px;
+    min-height: 100vh;
+}
+
+.artist-page-card {
+    background: var(--surface-darker);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+}
+
+.artist-image-container {
+    flex: 0 0 40%;
+}
+
+.artist-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-info-container {
+    padding: 40px;
+    flex: 1;
+}
+
+.artist-info-container h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.artist-subtitle {
+    font-size: 1.2rem;
+    color: var(--primary-glow);
+    margin-bottom: 30px;
+}
+
+.artist-bio p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    color: #000;
+    background-color: var(--primary-glow);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #fff;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+/* АНИМАЦИИ ДЛЯ СТРАНИЦЫ АРТИСТА */
+
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.artist-page-card .artist-image-container {
+    animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.artist-page-card .artist-info-container > * {
+    opacity: 0;
+    animation: slide-in-right 0.8s ease-out forwards;
+}
+
+.artist-page-card .artist-info-container h1 { animation-delay: 0.2s; }
+.artist-page-card .artist-info-container .artist-subtitle { animation-delay: 0.3s; }
+.artist-page-card .artist-info-container .artist-bio { animation-delay: 0.4s; }
+.artist-page-card .artist-info-container .back-button { animation-delay: 0.6s; }
+
+
+/*
+==============================================
+--- МОБИЛЬНАЯ АДАПТАЦИЯ (max-width: 800px) ---
+==============================================
+*/
+
+@media (max-width: 800px) {
+
+    .container {
+        padding: 0 20px;
+    }
+    
+    header {
+        padding: 15px 0;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    section {
+        padding: 100px 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    /* Главный экран */
+    .home-main-logo {
+        max-width: 120px;
+    }
+    #home h1 {
+        font-size: 4rem;
+        letter-spacing: -2px;
+    }
+    #home .subtitle {
+        font-size: 1.2rem;
+    }
+    .home-buttons-wrapper {
+        flex-direction: column;
+    }
+
+    /* Карточки ивентов */
+    .events-wrapper {
+        flex-direction: column;
+    }
+    .event-card {
+        min-height: auto;
+        max-width: none;
+    }
+    .event-poster-column {
+        height: 400px;
+    }
+    
+    /* Инструкция и Поддержка */
+    .instructions-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cta-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    .cta-card-text {
+        text-align: center;
+    }
+    .cta-card-arrow {
+        display: none;
+    }
+    .cta-cards-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    /* Страница артиста */
+    .artist-page-card {
+        flex-direction: column;
+    }
+    .artist-image-container {
+        flex: 0 0 auto;
+        height: 400px;
+    }
+    .artist-info-container {
+        padding: 25px;
+        text-align: center;
+    }
+    .artist-info-container h1 {
+        font-size: 2.5rem;
+    }
+    .artist-bio p {
+        text-align: left;
+    }
+
+    /* Ссылки */
+    .links-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* ===================================================
+--- СУПЕР-МОБИЛЬНАЯ АДАПТАЦИЯ (max-width: 480px) ---
+===================================================
+*/
+
+@media (max-width: 480px) {
+    #home h1 {
+        font-size: 3.2rem;
+    }
+
+    .social-link {
+        width: 100%;
+    }
+}
